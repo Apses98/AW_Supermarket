@@ -36,8 +36,10 @@ namespace supermarket_app
                 languagetextBox.Enabled = true;
                 platformtextBox.Enabled = false;
                 playtimetextBox.Enabled = false;
+                inStockTextBox.Enabled = true;
                 platformtextBox.Text = "";
                 playtimetextBox.Text = "";
+                inStockTextBox.Text = "";
             }
             else if (selectedIndex == 1)
             {
@@ -54,6 +56,8 @@ namespace supermarket_app
                 languagetextBox.Text = "";
                 platformtextBox.Text = "";
                 playtimetextBox.Enabled = true;
+                inStockTextBox.Enabled = true;
+                inStockTextBox.Text = "";
             }
             else if (selectedIndex == 2)
             {
@@ -71,13 +75,17 @@ namespace supermarket_app
                 platformtextBox.Enabled = true;
                 playtimetextBox.Enabled = false;
                 playtimetextBox.Text = "";
+                inStockTextBox.Enabled = true;
+                inStockTextBox.Text = "";
             }
         }
 
         private void updateDataGridView()
-        {
+        {            
             dataGridView1.DataSource = controller.getDataSource();
             dataGridView2.DataSource = controller.getDataSource();
+            dataGridView1.Refresh();
+            dataGridView2.Refresh();
         }
 
         private void mainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -113,6 +121,7 @@ namespace supermarket_app
                     {
                         x--;
                         MessageBox.Show($"Can't add more!\nThere is only {x} piece of this product in the inventory!");
+                        return;
                     }
                     
                         
@@ -161,7 +170,7 @@ namespace supermarket_app
 
         private void addProductButton_Click(object sender, EventArgs e)
         {
-            if (!controller.addProductButtonPressed(
+            if (controller.addProductButtonPressed(
                 productIDtextBox.Text,
                 nametextBox.Text,
                 pricetextBox.Text,
@@ -171,16 +180,13 @@ namespace supermarket_app
                 languagetextBox.Text,
                 platformtextBox.Text,
                 playtimetextBox.Text,
-                inStockTextBox.Text,
-                productTypeComboBox.SelectedItem.ToString()
+                productTypeComboBox.SelectedItem.ToString(),
+                inStockTextBox.Text
                 ))
-            {
-                MessageBox.Show("Error!\nCheck your inputs!!\nMake sure that your product Name and Price are not empty!\nAnd productID is not already in use.");
-            }
-            else
             {
                 clearTextBoxes();
             }
+            
             
         }
 
@@ -224,6 +230,8 @@ namespace supermarket_app
         private void sellButton_Click(object sender, EventArgs e)
         {
             controller.sellButtonpressed(cartListBox);
+            cartListBox.Items.Clear();
+            updateDataGridView();
         }
     }
 }

@@ -183,7 +183,7 @@
             this.cartListBox.Location = new System.Drawing.Point(5, 28);
             this.cartListBox.Name = "cartListBox";
             this.cartListBox.Size = new System.Drawing.Size(719, 289);
-            this.cartListBox.TabIndex = 3;
+            this.cartListBox.TabIndex = 2;
             // 
             // label1
             // 
@@ -213,7 +213,7 @@
             this.removeFromCartButton.Location = new System.Drawing.Point(5, 209);
             this.removeFromCartButton.Name = "removeFromCartButton";
             this.removeFromCartButton.Size = new System.Drawing.Size(231, 56);
-            this.removeFromCartButton.TabIndex = 1;
+            this.removeFromCartButton.TabIndex = 6;
             this.removeFromCartButton.Text = "Remove From Cart";
             this.removeFromCartButton.UseVisualStyleBackColor = true;
             this.removeFromCartButton.Click += new System.EventHandler(this.removeFromCartButton_Click);
@@ -225,7 +225,7 @@
             this.reprintButton.Location = new System.Drawing.Point(5, 147);
             this.reprintButton.Name = "reprintButton";
             this.reprintButton.Size = new System.Drawing.Size(231, 56);
-            this.reprintButton.TabIndex = 1;
+            this.reprintButton.TabIndex = 5;
             this.reprintButton.Text = "Reprint Receipt";
             this.reprintButton.UseVisualStyleBackColor = true;
             // 
@@ -237,7 +237,7 @@
             this.returnButton.Location = new System.Drawing.Point(5, 85);
             this.returnButton.Name = "returnButton";
             this.returnButton.Size = new System.Drawing.Size(231, 56);
-            this.returnButton.TabIndex = 2;
+            this.returnButton.TabIndex = 4;
             this.returnButton.Text = "Return";
             this.returnButton.UseVisualStyleBackColor = true;
             // 
@@ -376,7 +376,7 @@
             this.addToOrderButton.Location = new System.Drawing.Point(247, 347);
             this.addToOrderButton.Name = "addToOrderButton";
             this.addToOrderButton.Size = new System.Drawing.Size(126, 32);
-            this.addToOrderButton.TabIndex = 7;
+            this.addToOrderButton.TabIndex = 6;
             this.addToOrderButton.Text = "Add to order";
             this.addToOrderButton.UseVisualStyleBackColor = true;
             this.addToOrderButton.Click += new System.EventHandler(this.addToOrderButton_Click);
@@ -398,7 +398,7 @@
             this.orderNowButton.Location = new System.Drawing.Point(511, 347);
             this.orderNowButton.Name = "orderNowButton";
             this.orderNowButton.Size = new System.Drawing.Size(126, 32);
-            this.orderNowButton.TabIndex = 3;
+            this.orderNowButton.TabIndex = 8;
             this.orderNowButton.Text = "Order Now";
             this.orderNowButton.UseVisualStyleBackColor = true;
             // 
@@ -410,7 +410,7 @@
             this.genretextBox.Location = new System.Drawing.Point(107, 173);
             this.genretextBox.Name = "genretextBox";
             this.genretextBox.Size = new System.Drawing.Size(175, 23);
-            this.genretextBox.TabIndex = 11;
+            this.genretextBox.TabIndex = 14;
             // 
             // pricetextBox
             // 
@@ -420,7 +420,7 @@
             this.pricetextBox.Location = new System.Drawing.Point(107, 115);
             this.pricetextBox.Name = "pricetextBox";
             this.pricetextBox.Size = new System.Drawing.Size(175, 23);
-            this.pricetextBox.TabIndex = 13;
+            this.pricetextBox.TabIndex = 12;
             // 
             // label16
             // 
@@ -459,7 +459,7 @@
             this.deleteProductButton.Location = new System.Drawing.Point(151, 347);
             this.deleteProductButton.Name = "deleteProductButton";
             this.deleteProductButton.Size = new System.Drawing.Size(131, 32);
-            this.deleteProductButton.TabIndex = 4;
+            this.deleteProductButton.TabIndex = 21;
             this.deleteProductButton.Text = "Delete Product";
             this.deleteProductButton.UseVisualStyleBackColor = true;
             this.deleteProductButton.Click += new System.EventHandler(this.deleteProductButton_Click);
@@ -471,7 +471,7 @@
             this.addProductButton.Location = new System.Drawing.Point(11, 347);
             this.addProductButton.Name = "addProductButton";
             this.addProductButton.Size = new System.Drawing.Size(134, 32);
-            this.addProductButton.TabIndex = 6;
+            this.addProductButton.TabIndex = 20;
             this.addProductButton.Text = "Add Product";
             this.addProductButton.UseVisualStyleBackColor = true;
             this.addProductButton.Click += new System.EventHandler(this.addProductButton_Click);
@@ -484,7 +484,7 @@
             this.productIDtextBox.Location = new System.Drawing.Point(107, 57);
             this.productIDtextBox.Name = "productIDtextBox";
             this.productIDtextBox.Size = new System.Drawing.Size(175, 23);
-            this.productIDtextBox.TabIndex = 15;
+            this.productIDtextBox.TabIndex = 10;
             // 
             // languagetextBox
             // 
@@ -494,7 +494,7 @@
             this.languagetextBox.Location = new System.Drawing.Point(107, 231);
             this.languagetextBox.Name = "languagetextBox";
             this.languagetextBox.Size = new System.Drawing.Size(175, 23);
-            this.languagetextBox.TabIndex = 9;
+            this.languagetextBox.TabIndex = 16;
             // 
             // platformtextBox
             // 
@@ -505,7 +505,7 @@
             this.platformtextBox.Location = new System.Drawing.Point(107, 260);
             this.platformtextBox.Name = "platformtextBox";
             this.platformtextBox.Size = new System.Drawing.Size(175, 23);
-            this.platformtextBox.TabIndex = 15;
+            this.platformtextBox.TabIndex = 17;
             // 
             // productTypeComboBox
             // 
@@ -520,7 +520,7 @@
             this.productTypeComboBox.Location = new System.Drawing.Point(107, 28);
             this.productTypeComboBox.Name = "productTypeComboBox";
             this.productTypeComboBox.Size = new System.Drawing.Size(175, 23);
-            this.productTypeComboBox.TabIndex = 2;
+            this.productTypeComboBox.TabIndex = 9;
             this.productTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.productTypeComboBox_SelectedIndexChanged);
             // 
             // label6
@@ -573,7 +573,7 @@
             this.formattextBox.Location = new System.Drawing.Point(107, 202);
             this.formattextBox.Name = "formattextBox";
             this.formattextBox.Size = new System.Drawing.Size(175, 23);
-            this.formattextBox.TabIndex = 10;
+            this.formattextBox.TabIndex = 15;
             // 
             // nametextBox
             // 
@@ -583,7 +583,7 @@
             this.nametextBox.Location = new System.Drawing.Point(107, 86);
             this.nametextBox.Name = "nametextBox";
             this.nametextBox.Size = new System.Drawing.Size(175, 23);
-            this.nametextBox.TabIndex = 14;
+            this.nametextBox.TabIndex = 11;
             // 
             // inStockTextBox
             // 
@@ -594,7 +594,7 @@
             this.inStockTextBox.Location = new System.Drawing.Point(107, 318);
             this.inStockTextBox.Name = "inStockTextBox";
             this.inStockTextBox.Size = new System.Drawing.Size(175, 23);
-            this.inStockTextBox.TabIndex = 13;
+            this.inStockTextBox.TabIndex = 19;
             // 
             // playtimetextBox
             // 
@@ -605,7 +605,7 @@
             this.playtimetextBox.Location = new System.Drawing.Point(107, 289);
             this.playtimetextBox.Name = "playtimetextBox";
             this.playtimetextBox.Size = new System.Drawing.Size(175, 23);
-            this.playtimetextBox.TabIndex = 13;
+            this.playtimetextBox.TabIndex = 18;
             // 
             // label13
             // 
@@ -613,9 +613,9 @@
             this.label13.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label13.Location = new System.Drawing.Point(11, 317);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(54, 19);
+            this.label13.Size = new System.Drawing.Size(63, 19);
             this.label13.TabIndex = 7;
-            this.label13.Text = "InStock";
+            this.label13.Text = "InStock*:";
             // 
             // label4
             // 
@@ -645,7 +645,7 @@
             this.authortextBox.Location = new System.Drawing.Point(107, 144);
             this.authortextBox.Name = "authortextBox";
             this.authortextBox.Size = new System.Drawing.Size(175, 23);
-            this.authortextBox.TabIndex = 12;
+            this.authortextBox.TabIndex = 13;
             // 
             // label8
             // 
@@ -728,7 +728,7 @@
             this.dataGridView2.RowTemplate.Height = 25;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView2.Size = new System.Drawing.Size(769, 281);
-            this.dataGridView2.TabIndex = 1;
+            this.dataGridView2.TabIndex = 21;
             // 
             // textBox1
             // 
@@ -738,7 +738,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.PlaceholderText = "Search...";
             this.textBox1.Size = new System.Drawing.Size(189, 23);
-            this.textBox1.TabIndex = 2;
+            this.textBox1.TabIndex = 22;
             // 
             // totalSalesButton
             // 
@@ -747,7 +747,7 @@
             this.totalSalesButton.Location = new System.Drawing.Point(3, 96);
             this.totalSalesButton.Name = "totalSalesButton";
             this.totalSalesButton.Size = new System.Drawing.Size(189, 53);
-            this.totalSalesButton.TabIndex = 7;
+            this.totalSalesButton.TabIndex = 24;
             this.totalSalesButton.Text = "Total Sales";
             this.totalSalesButton.UseVisualStyleBackColor = true;
             // 
@@ -758,7 +758,7 @@
             this.toptenButton.Location = new System.Drawing.Point(3, 40);
             this.toptenButton.Name = "toptenButton";
             this.toptenButton.Size = new System.Drawing.Size(189, 50);
-            this.toptenButton.TabIndex = 5;
+            this.toptenButton.TabIndex = 23;
             this.toptenButton.Text = "Top 10 products";
             this.toptenButton.UseVisualStyleBackColor = true;
             // 

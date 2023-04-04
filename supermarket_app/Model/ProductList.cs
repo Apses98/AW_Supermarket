@@ -166,9 +166,12 @@ namespace supermarket_app
 
         internal void updateInventory(object item)
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < productList.Count; i++)
             {
-
+                if(productList.ElementAt(i).ProductID == int.Parse(item.ToString().Split('\t')[0]))
+                {
+                    productList.ElementAt(i).InStock -= int.Parse(item.ToString().Split('\t')[2].Split('x')[1]);
+                }
             }
         }
     }

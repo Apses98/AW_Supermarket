@@ -16,28 +16,80 @@ namespace supermarket_app
         {
             int productID = 0, inventory, price;
             if (productIDString == "")
+            {
                 productID = productlist.generateProductID();
-            if (name == "" || stringPrice == "")
+            }
+            else
+            {
+                try
+                {
+                    productID = int.Parse(productIDString);
+
+                    if (!productlist.isProductIDValid(productID))
+                    {
+                        MessageBox.Show("Product ID is already used by another product!\nTry another product ID!");
+                        return false;
+                    }
+                    if (productID < 0)
+                    {
+                        MessageBox.Show("Product ID can not be negative!");
+                        return false;
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Product id should be a number!");
+                    return false;
+                }
+            }
+                
+            
+            if (name == "")
+            {
+                MessageBox.Show("Name can not be empty!");
                 return false;
+            }
+            if (stringPrice == "")
+            {
+                MessageBox.Show("Price can not be empty!");
+                return false;
+            }
+            if (inStock == "")
+            {
+                MessageBox.Show("InStock textbox can not be empty!");
+                return false;
+            }
 
             try
             {
-                if (productIDString != "")
-                {
-                    productID = int.Parse(productIDString);
-                    if (!productlist.isProductIDValid(productID))
-                        return false;
-                }
-                
-                inventory = int.Parse(inStock);
                 price = int.Parse(stringPrice);
+                if (price < 0)
+                {
+                    MessageBox.Show("Price can not be negative!");
+                    return false;
+                }
             }
             catch (Exception)
             {
+                MessageBox.Show("Price should be a number!");
                 return false;
             }
-            
-          
+
+            try
+            {
+                inventory = int.Parse(inStock);
+                if (inventory < 0 )
+                {
+                    MessageBox.Show("InStock can not be negative!");
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("InStock textbox should be a number!");
+                return false;
+            }
+
             productlist.addProduct(
             productID,
             name,
