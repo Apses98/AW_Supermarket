@@ -85,15 +85,54 @@ namespace supermarket_app
             controller.FormColsing();
         }
 
-        private void addSelectionToCart()
+        private void updateCart()
         {
-            cartListBox.Items.Add(dataGridView1.SelectedRows[0].Cells[2].Value + "\t" + dataGridView1.SelectedRows[0].Cells[3].Value);
+            if (int.Parse(dataGridView1.SelectedRows[0].Cells[1].Value.ToString()) <= 0)
+            {
+                MessageBox.Show("Product out of stock!");
+                return;
+            }
+            int x = 1;
+            if (cartListBox.Items.Count == 0)
+            {
+                cartListBox.Items.Add(dataGridView1.SelectedRows[0].Cells[0].Value.ToString() + '\t' + dataGridView1.SelectedRows[0].Cells[3].Value.ToString() + "\t" + dataGridView1.SelectedRows[0].Cells[4].Value + " x " + '1');
+                updateTotalPrice(); 
+                return;
+            }
+            for (int i = 0; i < cartListBox.Items.Count; i++)
+            {
+                if (cartListBox.Items[i].ToString().Split('\t')[1] == dataGridView1.SelectedRows[0].Cells[3].Value.ToString())
+                {
+                    x = int.Parse(cartListBox.Items[i].ToString().Split('\t')[2].Split('x')[1].ToString()) + 1;
+                    if (x <= int.Parse(dataGridView1.SelectedRows[0].Cells[1].Value.ToString()))
+                    {
+                        cartListBox.Items.Add(dataGridView1.SelectedRows[0].Cells[0].Value.ToString() + '\t' + dataGridView1.SelectedRows[0].Cells[3].Value + "\t" + dataGridView1.SelectedRows[0].Cells[4].Value + " x " + x.ToString());
+                        cartListBox.Items.RemoveAt(i);
+                    }
+                    else
+                    {
+                        x--;
+                        MessageBox.Show($"Can't add more!\nThere is only {x} piece of this product in the inventory!");
+                    }
+                    
+                        
+                }
+                else
+                {
+                    x = 1;
+                }
+            }
+            if (x == 1)
+            {
+                cartListBox.Items.Add(dataGridView1.SelectedRows[0].Cells[0].Value.ToString() + '\t' + dataGridView1.SelectedRows[0].Cells[3].Value + "\t" + dataGridView1.SelectedRows[0].Cells[4].Value + " x " + x.ToString());
+            }
+            
             updateTotalPrice();
         }
 
         private void dataGridView1_Click(object sender, EventArgs e)
         {
-            addSelectionToCart();
+            updateCart();
         }
 
         private void removeFromCartButton_Click(object sender, EventArgs e)
@@ -109,7 +148,7 @@ namespace supermarket_app
             {
                 foreach (string product in cartListBox.Items)
                 {
-                    totalPrice += int.Parse(product.Split('\t')[1]);
+                    totalPrice += int.Parse(product.Split('\t')[2].Split("x")[0]) * int.Parse(product.Split('\t')[2].Split("x")[1]);
                 }
                 TotalLabel.Text = "Total: " + totalPrice.ToString();
             }
@@ -171,6 +210,20 @@ namespace supermarket_app
             }
             
             
+        }
+
+        private void addToOrderButton_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGridView2.SelectedRows.Count; i++)
+            {
+                orderListBox.Items.Add(dataGridView2.SelectedRows[i].Cells[3].Value);
+            }
+            
+        }
+
+        private void sellButton_Click(object sender, EventArgs e)
+        {
+            controller.sellButtonpressed(cartListBox);
         }
     }
 }

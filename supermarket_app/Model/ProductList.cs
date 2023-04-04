@@ -45,8 +45,8 @@ namespace supermarket_app
                             Language    = line.Split(',').ElementAt(6),
                             Platform    = line.Split(',').ElementAt(7),
                             PlayTime    = line.Split(',').ElementAt(8),
-                            inventory   = int.Parse(line.Split(',').ElementAt(9)),
-                            ProductType = line.Split(',').Last()
+                            InStock   = int.Parse(line.Split(',').ElementAt(9)),
+                            Type = line.Split(',').Last()
                         });
 
                     if (line.Split(',').ElementAt(0) == "")
@@ -110,9 +110,9 @@ namespace supermarket_app
                     ',' +
                     product.PlayTime +
                     ',' +
-                    product.inventory +
+                    product.InStock +
                     ',' +
-                    product.ProductType +
+                    product.Type +
                     
                     '\r';
             }
@@ -134,8 +134,8 @@ namespace supermarket_app
                 Language = language,
                 Platform = platform,
                 PlayTime = playtime,
-                inventory = inventory,
-                ProductType = productType
+                InStock = inventory,
+                Type = productType
             });
         }
 
@@ -162,6 +162,14 @@ namespace supermarket_app
             }
                 
 
+        }
+
+        internal void updateInventory(object item)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+
+            }
         }
     }
 }

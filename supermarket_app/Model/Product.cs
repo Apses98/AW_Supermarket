@@ -3,8 +3,8 @@
     internal class Product
     {
         public int ProductID { get; set; }
-        public int inventory { get; set; }
-        public string? ProductType { get; set; }
+        public int InStock { get; set; }
+        public string? Type { get; set; }
         public string? Name { get; set; }
         public int Price { get; set; }
         public string? Author { get; set; }

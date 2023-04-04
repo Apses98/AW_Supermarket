@@ -82,5 +82,13 @@ namespace supermarket_app
         {
             return productlist.getDataSource();
         }
+
+        internal void sellButtonpressed(ListBox cartListBox)
+        {
+            foreach (var item in cartListBox.Items)
+            {
+                productlist.updateInventory(item);
+            }
+        }
     }
 }

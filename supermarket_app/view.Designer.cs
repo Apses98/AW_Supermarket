@@ -43,7 +43,11 @@
             this.inventoryTab = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.makeOrderButton = new System.Windows.Forms.Button();
+            this.orderListBox = new System.Windows.Forms.ListBox();
+            this.RemoveFromOrderButton = new System.Windows.Forms.Button();
+            this.addToOrderButton = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.orderNowButton = new System.Windows.Forms.Button();
             this.genretextBox = new System.Windows.Forms.TextBox();
             this.pricetextBox = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -74,7 +78,6 @@
             this.splitContainer6 = new System.Windows.Forms.SplitContainer();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.addToOrderButton = new System.Windows.Forms.Button();
             this.totalSalesButton = new System.Windows.Forms.Button();
             this.toptenButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
@@ -248,6 +251,7 @@
             this.sellButton.TabIndex = 3;
             this.sellButton.Text = "Sell";
             this.sellButton.UseVisualStyleBackColor = true;
+            this.sellButton.Click += new System.EventHandler(this.sellButton_Click);
             // 
             // dataGridView1
             // 
@@ -255,6 +259,7 @@
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
@@ -304,7 +309,11 @@
             // 
             // splitContainer4.Panel1
             // 
-            this.splitContainer4.Panel1.Controls.Add(this.makeOrderButton);
+            this.splitContainer4.Panel1.Controls.Add(this.orderListBox);
+            this.splitContainer4.Panel1.Controls.Add(this.RemoveFromOrderButton);
+            this.splitContainer4.Panel1.Controls.Add(this.addToOrderButton);
+            this.splitContainer4.Panel1.Controls.Add(this.label14);
+            this.splitContainer4.Panel1.Controls.Add(this.orderNowButton);
             // 
             // splitContainer4.Panel2
             // 
@@ -337,19 +346,67 @@
             this.splitContainer4.SplitterDistance = 668;
             this.splitContainer4.TabIndex = 0;
             // 
-            // makeOrderButton
+            // orderListBox
             // 
-            this.makeOrderButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.orderListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.makeOrderButton.Location = new System.Drawing.Point(421, 330);
-            this.makeOrderButton.Name = "makeOrderButton";
-            this.makeOrderButton.Size = new System.Drawing.Size(244, 52);
-            this.makeOrderButton.TabIndex = 3;
-            this.makeOrderButton.Text = "Make New Order";
-            this.makeOrderButton.UseVisualStyleBackColor = true;
+            this.orderListBox.FormattingEnabled = true;
+            this.orderListBox.ItemHeight = 15;
+            this.orderListBox.Location = new System.Drawing.Point(19, 37);
+            this.orderListBox.Name = "orderListBox";
+            this.orderListBox.Size = new System.Drawing.Size(618, 304);
+            this.orderListBox.TabIndex = 5;
+            // 
+            // RemoveFromOrderButton
+            // 
+            this.RemoveFromOrderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RemoveFromOrderButton.Location = new System.Drawing.Point(379, 347);
+            this.RemoveFromOrderButton.Name = "RemoveFromOrderButton";
+            this.RemoveFromOrderButton.Size = new System.Drawing.Size(126, 32);
+            this.RemoveFromOrderButton.TabIndex = 7;
+            this.RemoveFromOrderButton.Text = "Remove from order";
+            this.RemoveFromOrderButton.UseVisualStyleBackColor = true;
+            // 
+            // addToOrderButton
+            // 
+            this.addToOrderButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.addToOrderButton.Location = new System.Drawing.Point(247, 347);
+            this.addToOrderButton.Name = "addToOrderButton";
+            this.addToOrderButton.Size = new System.Drawing.Size(126, 32);
+            this.addToOrderButton.TabIndex = 7;
+            this.addToOrderButton.Text = "Add to order";
+            this.addToOrderButton.UseVisualStyleBackColor = true;
+            this.addToOrderButton.Click += new System.EventHandler(this.addToOrderButton_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label14.Location = new System.Drawing.Point(19, 8);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(127, 20);
+            this.label14.TabIndex = 4;
+            this.label14.Text = "Make New Order";
+            // 
+            // orderNowButton
+            // 
+            this.orderNowButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.orderNowButton.Location = new System.Drawing.Point(511, 347);
+            this.orderNowButton.Name = "orderNowButton";
+            this.orderNowButton.Size = new System.Drawing.Size(126, 32);
+            this.orderNowButton.TabIndex = 3;
+            this.orderNowButton.Text = "Order Now";
+            this.orderNowButton.UseVisualStyleBackColor = true;
             // 
             // genretextBox
             // 
+            this.genretextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.genretextBox.Location = new System.Drawing.Point(107, 173);
             this.genretextBox.Name = "genretextBox";
             this.genretextBox.Size = new System.Drawing.Size(175, 23);
@@ -357,6 +414,9 @@
             // 
             // pricetextBox
             // 
+            this.pricetextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pricetextBox.Location = new System.Drawing.Point(107, 115);
             this.pricetextBox.Name = "pricetextBox";
             this.pricetextBox.Size = new System.Drawing.Size(175, 23);
@@ -394,9 +454,11 @@
             // 
             // deleteProductButton
             // 
-            this.deleteProductButton.Location = new System.Drawing.Point(158, 348);
+            this.deleteProductButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.deleteProductButton.Location = new System.Drawing.Point(151, 347);
             this.deleteProductButton.Name = "deleteProductButton";
-            this.deleteProductButton.Size = new System.Drawing.Size(104, 32);
+            this.deleteProductButton.Size = new System.Drawing.Size(131, 32);
             this.deleteProductButton.TabIndex = 4;
             this.deleteProductButton.Text = "Delete Product";
             this.deleteProductButton.UseVisualStyleBackColor = true;
@@ -404,9 +466,11 @@
             // 
             // addProductButton
             // 
-            this.addProductButton.Location = new System.Drawing.Point(40, 348);
+            this.addProductButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.addProductButton.Location = new System.Drawing.Point(11, 347);
             this.addProductButton.Name = "addProductButton";
-            this.addProductButton.Size = new System.Drawing.Size(112, 32);
+            this.addProductButton.Size = new System.Drawing.Size(134, 32);
             this.addProductButton.TabIndex = 6;
             this.addProductButton.Text = "Add Product";
             this.addProductButton.UseVisualStyleBackColor = true;
@@ -414,6 +478,9 @@
             // 
             // productIDtextBox
             // 
+            this.productIDtextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.productIDtextBox.Location = new System.Drawing.Point(107, 57);
             this.productIDtextBox.Name = "productIDtextBox";
             this.productIDtextBox.Size = new System.Drawing.Size(175, 23);
@@ -421,6 +488,9 @@
             // 
             // languagetextBox
             // 
+            this.languagetextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.languagetextBox.Location = new System.Drawing.Point(107, 231);
             this.languagetextBox.Name = "languagetextBox";
             this.languagetextBox.Size = new System.Drawing.Size(175, 23);
@@ -428,6 +498,9 @@
             // 
             // platformtextBox
             // 
+            this.platformtextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.platformtextBox.Enabled = false;
             this.platformtextBox.Location = new System.Drawing.Point(107, 260);
             this.platformtextBox.Name = "platformtextBox";
@@ -436,8 +509,9 @@
             // 
             // productTypeComboBox
             // 
-            this.productTypeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.productTypeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.productTypeComboBox.FormattingEnabled = true;
             this.productTypeComboBox.Items.AddRange(new object[] {
             "Book",
@@ -493,6 +567,9 @@
             // 
             // formattextBox
             // 
+            this.formattextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.formattextBox.Location = new System.Drawing.Point(107, 202);
             this.formattextBox.Name = "formattextBox";
             this.formattextBox.Size = new System.Drawing.Size(175, 23);
@@ -500,6 +577,9 @@
             // 
             // nametextBox
             // 
+            this.nametextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.nametextBox.Location = new System.Drawing.Point(107, 86);
             this.nametextBox.Name = "nametextBox";
             this.nametextBox.Size = new System.Drawing.Size(175, 23);
@@ -507,6 +587,9 @@
             // 
             // inStockTextBox
             // 
+            this.inStockTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.inStockTextBox.Enabled = false;
             this.inStockTextBox.Location = new System.Drawing.Point(107, 318);
             this.inStockTextBox.Name = "inStockTextBox";
@@ -515,6 +598,9 @@
             // 
             // playtimetextBox
             // 
+            this.playtimetextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.playtimetextBox.Enabled = false;
             this.playtimetextBox.Location = new System.Drawing.Point(107, 289);
             this.playtimetextBox.Name = "playtimetextBox";
@@ -553,6 +639,9 @@
             // 
             // authortextBox
             // 
+            this.authortextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.authortextBox.Location = new System.Drawing.Point(107, 144);
             this.authortextBox.Name = "authortextBox";
             this.authortextBox.Size = new System.Drawing.Size(175, 23);
@@ -619,7 +708,6 @@
             // splitContainer6.Panel2
             // 
             this.splitContainer6.Panel2.Controls.Add(this.textBox1);
-            this.splitContainer6.Panel2.Controls.Add(this.addToOrderButton);
             this.splitContainer6.Panel2.Controls.Add(this.totalSalesButton);
             this.splitContainer6.Panel2.Controls.Add(this.toptenButton);
             this.splitContainer6.Size = new System.Drawing.Size(970, 281);
@@ -630,8 +718,8 @@
             // 
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.AllowUserToResizeColumns = false;
             this.dataGridView2.AllowUserToResizeRows = false;
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView2.Location = new System.Drawing.Point(0, 0);
@@ -646,28 +734,17 @@
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(3, 18);
+            this.textBox1.Location = new System.Drawing.Point(3, 1);
             this.textBox1.Name = "textBox1";
             this.textBox1.PlaceholderText = "Search...";
             this.textBox1.Size = new System.Drawing.Size(189, 23);
             this.textBox1.TabIndex = 2;
             // 
-            // addToOrderButton
-            // 
-            this.addToOrderButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.addToOrderButton.Location = new System.Drawing.Point(2, 178);
-            this.addToOrderButton.Name = "addToOrderButton";
-            this.addToOrderButton.Size = new System.Drawing.Size(189, 53);
-            this.addToOrderButton.TabIndex = 7;
-            this.addToOrderButton.Text = "Add to Order";
-            this.addToOrderButton.UseVisualStyleBackColor = true;
-            // 
             // totalSalesButton
             // 
             this.totalSalesButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalSalesButton.Location = new System.Drawing.Point(3, 119);
+            this.totalSalesButton.Location = new System.Drawing.Point(3, 96);
             this.totalSalesButton.Name = "totalSalesButton";
             this.totalSalesButton.Size = new System.Drawing.Size(189, 53);
             this.totalSalesButton.TabIndex = 7;
@@ -678,7 +755,7 @@
             // 
             this.toptenButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.toptenButton.Location = new System.Drawing.Point(3, 63);
+            this.toptenButton.Location = new System.Drawing.Point(3, 40);
             this.toptenButton.Name = "toptenButton";
             this.toptenButton.Size = new System.Drawing.Size(189, 50);
             this.toptenButton.TabIndex = 5;
@@ -715,6 +792,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.Panel1.PerformLayout();
             this.splitContainer4.Panel2.ResumeLayout(false);
             this.splitContainer4.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
@@ -749,7 +827,7 @@
         private Button sellButton;
         private SplitContainer splitContainer3;
         private DataGridView dataGridView2;
-        private Button makeOrderButton;
+        private Button orderNowButton;
         private TextBox textBox1;
         private Button deleteProductButton;
         private Button toptenButton;
@@ -785,5 +863,8 @@
         private Button addToOrderButton;
         private TextBox inStockTextBox;
         private Label label13;
+        private Label label14;
+        private ListBox orderListBox;
+        private Button RemoveFromOrderButton;
     }
 }
