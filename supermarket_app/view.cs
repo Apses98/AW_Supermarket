@@ -1,3 +1,5 @@
+using System.Security.Cryptography.X509Certificates;
+
 namespace supermarket_app
 {
     public partial class mainForm : Form
@@ -36,10 +38,10 @@ namespace supermarket_app
                 languagetextBox.Enabled = true;
                 platformtextBox.Enabled = false;
                 playtimetextBox.Enabled = false;
-                inStockTextBox.Enabled = true;
+                quantityTextBox.Enabled = true;
                 platformtextBox.Text = "";
                 playtimetextBox.Text = "";
-                inStockTextBox.Text = "";
+                quantityTextBox.Text = "";
             }
             else if (selectedIndex == 1)
             {
@@ -56,8 +58,8 @@ namespace supermarket_app
                 languagetextBox.Text = "";
                 platformtextBox.Text = "";
                 playtimetextBox.Enabled = true;
-                inStockTextBox.Enabled = true;
-                inStockTextBox.Text = "";
+                quantityTextBox.Enabled = true;
+                quantityTextBox.Text = "";
             }
             else if (selectedIndex == 2)
             {
@@ -75,8 +77,8 @@ namespace supermarket_app
                 platformtextBox.Enabled = true;
                 playtimetextBox.Enabled = false;
                 playtimetextBox.Text = "";
-                inStockTextBox.Enabled = true;
-                inStockTextBox.Text = "";
+                quantityTextBox.Enabled = true;
+                quantityTextBox.Text = "";
             }
         }
 
@@ -181,7 +183,7 @@ namespace supermarket_app
                 platformtextBox.Text,
                 playtimetextBox.Text,
                 productTypeComboBox.SelectedItem.ToString(),
-                inStockTextBox.Text
+                quantityTextBox.Text
                 ))
             {
                 clearTextBoxes();
@@ -220,18 +222,57 @@ namespace supermarket_app
 
         private void addToOrderButton_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < dataGridView2.SelectedRows.Count; i++)
-            {
-                orderListBox.Items.Add(dataGridView2.SelectedRows[i].Cells[3].Value);
-            }
-            
+            updateNewOrderList();
         }
 
         private void sellButton_Click(object sender, EventArgs e)
         {
+            if (cartListBox.Items.Count == 0)
+                return;
             controller.sellButtonpressed(cartListBox);
             cartListBox.Items.Clear();
             updateDataGridView();
+        }
+
+
+        private void updateNewOrderList()
+        {
+            int x = 1, noMatch = 0;
+            if (orderListBox.Items.Count == 0)
+            {
+                for (int i = 0; i < dataGridView2.SelectedRows.Count; i++)
+                {
+                    orderListBox.Items.Add(dataGridView2.SelectedRows[i].Cells[0].Value.ToString() + '\t' + dataGridView2.SelectedRows[i].Cells[3].Value.ToString() + "\t" + " x " + '1');
+                }
+                return;
+            }
+            for (int i = 0; i < dataGridView2.SelectedRows.Count; i++)
+            {
+                
+                for (int j = 0; j < orderListBox.Items.Count; j++)
+                {
+                    x = 1;
+                    if (int.Parse(dataGridView2.SelectedRows[i].Cells[0].Value.ToString()) == int.Parse(orderListBox.Items[j].ToString().Split('\t')[0]))
+                    {
+                        x += int.Parse(orderListBox.Items[j].ToString().Split('\t')[2].Split('x')[1]);
+                        orderListBox.Items.Add(dataGridView2.SelectedRows[i].Cells[0].Value.ToString() + '\t' + dataGridView2.SelectedRows[i].Cells[3].Value.ToString() + "\t" + " x " + x.ToString());
+                        orderListBox.Items.RemoveAt(j);
+                        noMatch = 1;
+                        break;
+                    }
+                }
+                if (noMatch == 0)
+                {
+                    orderListBox.Items.Add(dataGridView2.SelectedRows[i].Cells[0].Value.ToString() + '\t' + dataGridView2.SelectedRows[i].Cells[3].Value.ToString() + "\t" + " x " + '1');
+                }
+                
+            }
+
+        }
+
+        private void RemoveFromOrderButton_Click(object sender, EventArgs e)
+        {
+            orderListBox.Items.Clear();
         }
     }
 }

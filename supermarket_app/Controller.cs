@@ -12,7 +12,7 @@ namespace supermarket_app
             productlist = new ProductList();
         }
 
-        internal bool addProductButtonPressed(string productIDString, string name, string stringPrice, string author, string genre, string format, string language, string platform, string playtime, string productType, string inStock)
+        internal bool addProductButtonPressed(string productIDString, string name, string stringPrice, string author, string genre, string format, string language, string platform, string playtime, string productType, string stringQuantity)
         {
             int productID = 0, inventory, price;
             if (productIDString == "")
@@ -54,9 +54,9 @@ namespace supermarket_app
                 MessageBox.Show("Price can not be empty!");
                 return false;
             }
-            if (inStock == "")
+            if (stringQuantity == "")
             {
-                MessageBox.Show("InStock textbox can not be empty!");
+                MessageBox.Show("Quantity textbox can not be empty!");
                 return false;
             }
 
@@ -77,16 +77,16 @@ namespace supermarket_app
 
             try
             {
-                inventory = int.Parse(inStock);
+                inventory = int.Parse(stringQuantity);
                 if (inventory < 0 )
                 {
-                    MessageBox.Show("InStock can not be negative!");
+                    MessageBox.Show("Quantity can not be negative!");
                     return false;
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show("InStock textbox should be a number!");
+                MessageBox.Show("Quantity textbox should be a number!");
                 return false;
             }
 
@@ -139,7 +139,7 @@ namespace supermarket_app
         {
             foreach (var item in cartListBox.Items)
             {
-                productlist.updateInventory(item);
+                productlist.updateQuantity(item, "sell");
             }
         }
     }

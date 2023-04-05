@@ -65,7 +65,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.formattextBox = new System.Windows.Forms.TextBox();
             this.nametextBox = new System.Windows.Forms.TextBox();
-            this.inStockTextBox = new System.Windows.Forms.TextBox();
+            this.quantityTextBox = new System.Windows.Forms.TextBox();
             this.playtimetextBox = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -334,7 +334,7 @@
             this.splitContainer4.Panel2.Controls.Add(this.label2);
             this.splitContainer4.Panel2.Controls.Add(this.formattextBox);
             this.splitContainer4.Panel2.Controls.Add(this.nametextBox);
-            this.splitContainer4.Panel2.Controls.Add(this.inStockTextBox);
+            this.splitContainer4.Panel2.Controls.Add(this.quantityTextBox);
             this.splitContainer4.Panel2.Controls.Add(this.playtimetextBox);
             this.splitContainer4.Panel2.Controls.Add(this.label13);
             this.splitContainer4.Panel2.Controls.Add(this.label4);
@@ -368,6 +368,7 @@
             this.RemoveFromOrderButton.TabIndex = 7;
             this.RemoveFromOrderButton.Text = "Remove from order";
             this.RemoveFromOrderButton.UseVisualStyleBackColor = true;
+            this.RemoveFromOrderButton.Click += new System.EventHandler(this.RemoveFromOrderButton_Click);
             // 
             // addToOrderButton
             // 
@@ -585,16 +586,16 @@
             this.nametextBox.Size = new System.Drawing.Size(175, 23);
             this.nametextBox.TabIndex = 11;
             // 
-            // inStockTextBox
+            // quantityTextBox
             // 
-            this.inStockTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.quantityTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.inStockTextBox.Enabled = false;
-            this.inStockTextBox.Location = new System.Drawing.Point(107, 318);
-            this.inStockTextBox.Name = "inStockTextBox";
-            this.inStockTextBox.Size = new System.Drawing.Size(175, 23);
-            this.inStockTextBox.TabIndex = 19;
+            this.quantityTextBox.Enabled = false;
+            this.quantityTextBox.Location = new System.Drawing.Point(107, 318);
+            this.quantityTextBox.Name = "quantityTextBox";
+            this.quantityTextBox.Size = new System.Drawing.Size(175, 23);
+            this.quantityTextBox.TabIndex = 19;
             // 
             // playtimetextBox
             // 
@@ -613,9 +614,9 @@
             this.label13.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label13.Location = new System.Drawing.Point(11, 317);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(63, 19);
+            this.label13.Size = new System.Drawing.Size(72, 19);
             this.label13.TabIndex = 7;
-            this.label13.Text = "InStock*:";
+            this.label13.Text = "Quantity*:";
             // 
             // label4
             // 
@@ -861,7 +862,7 @@
         private Label label12;
         private SplitContainer splitContainer6;
         private Button addToOrderButton;
-        private TextBox inStockTextBox;
+        private TextBox quantityTextBox;
         private Label label13;
         private Label label14;
         private ListBox orderListBox;

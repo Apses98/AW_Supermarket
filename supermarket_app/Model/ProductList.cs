@@ -24,8 +24,14 @@ namespace supermarket_app
             
         }
 
+        
         private void loadCSVFile()
         {
+            /* loadCSVFile function -> loads a csv file (database.csv) which includes all information about the products in the supermarket.
+            * The function loads the info to the product list and checks if a product does not have a product id (may be cased be adding the products manualy to the csv file) it requests a 
+            * new unique product ID. 
+            * If the file is missing a new file gets created!
+            */
             if (File.Exists("database.csv"))
             {
                 csvFile = new List<string>();
@@ -45,7 +51,7 @@ namespace supermarket_app
                             Language    = line.Split(',').ElementAt(6),
                             Platform    = line.Split(',').ElementAt(7),
                             PlayTime    = line.Split(',').ElementAt(8),
-                            InStock   = int.Parse(line.Split(',').ElementAt(9)),
+                            Quantity   = int.Parse(line.Split(',').ElementAt(9)),
                             Type = line.Split(',').Last()
                         });
 
@@ -59,13 +65,13 @@ namespace supermarket_app
             }
             else
             {
-                return;
+                File.Create("database.csv");
             }
-            
         }
 
         internal int generateProductID()
         {
+            /* This function generates a new random product ID and to make it unique it compares it to all other product id's */
             Random rand = new Random();
             int productID = rand.Next(MIN_PRODUCT_ID, MAX_PRODUCT_ID);
             for (int i = 0; i < productList.Count; i++)
@@ -81,11 +87,13 @@ namespace supermarket_app
 
         internal object getDataSource()
         {
+            // Returns the dataSource 
             return productlistSource;
         }
 
         internal void saveFile()
         {
+            /* Saves all the data in the productList to the file/database (database.csv) */
             string result = "";
             
             foreach (var product in productList)
@@ -110,7 +118,7 @@ namespace supermarket_app
                     ',' +
                     product.PlayTime +
                     ',' +
-                    product.InStock +
+                    product.Quantity +
                     ',' +
                     product.Type +
                     
@@ -123,6 +131,7 @@ namespace supermarket_app
 
         internal void addProduct(int productID, string name, int price, string author, string genre, string format, string language, string platform, string playtime, int inventory, string productType)
         {
+            /* Adds a new Product to the productList */
             productList.Add(new Product
             {
                 ProductID = productID,
@@ -134,13 +143,14 @@ namespace supermarket_app
                 Language = language,
                 Platform = platform,
                 PlayTime = playtime,
-                InStock = inventory,
+                Quantity = inventory,
                 Type = productType
             });
         }
 
         internal bool isProductIDValid(int productID)
         {
+            /* Checks if the product ID is used by another product */
             foreach (var product in productList)
             {
                 if (productID == product.ProductID)
@@ -153,6 +163,7 @@ namespace supermarket_app
 
         internal void deleteProduct(int productID)
         {
+            /* Deletes a product from the productList */
             for(int i = 0; i < productList.Count; i++)
             {
                 if (productID == productList.ElementAt(i).ProductID)
@@ -164,15 +175,30 @@ namespace supermarket_app
 
         }
 
-        internal void updateInventory(object item)
+        internal void updateQuantity(object item, string operation)
         {
-            for (int i = 0; i < productList.Count; i++)
+            /* Edits the Quantity of a product */
+            if (operation == "sell")
             {
-                if(productList.ElementAt(i).ProductID == int.Parse(item.ToString().Split('\t')[0]))
+                for (int i = 0; i < productList.Count; i++)
                 {
-                    productList.ElementAt(i).InStock -= int.Parse(item.ToString().Split('\t')[2].Split('x')[1]);
+                    if (productList.ElementAt(i).ProductID == int.Parse(item.ToString().Split('\t')[0]))
+                    {
+                        productList.ElementAt(i).Quantity -= int.Parse(item.ToString().Split('\t')[2].Split('x')[1]);
+                    }
                 }
             }
+            else if (operation == "return")
+            {
+                for (int i = 0; i < productList.Count; i++)
+                {
+                    if (productList.ElementAt(i).ProductID == int.Parse(item.ToString().Split('\t')[0]))
+                    {
+                        productList.ElementAt(i).Quantity += int.Parse(item.ToString().Split('\t')[2].Split('x')[1]);
+                    }
+                }
+            }
+            
         }
     }
 }

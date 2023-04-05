@@ -3,7 +3,7 @@
     internal class Product
     {
         public int ProductID { get; set; }
-        public int InStock { get; set; }
+        public int Quantity { get; set; }
         public string? Type { get; set; }
         public string? Name { get; set; }
         public int Price { get; set; }
