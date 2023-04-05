@@ -272,7 +272,18 @@ namespace supermarket_app
 
         private void RemoveFromOrderButton_Click(object sender, EventArgs e)
         {
+            if (orderListBox.SelectedIndex == -1)
+                return;
+            orderListBox.Items.RemoveAt(orderListBox.SelectedIndex);
+        }
+
+        private void orderNowButton_Click(object sender, EventArgs e)
+        {
+            if (orderListBox.Items.Count == 0)
+                return;
+            controller.orderNowButtonPressed(orderListBox);
             orderListBox.Items.Clear();
+            updateDataGridView();
         }
     }
 }

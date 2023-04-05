@@ -402,6 +402,7 @@
             this.orderNowButton.TabIndex = 8;
             this.orderNowButton.Text = "Order Now";
             this.orderNowButton.UseVisualStyleBackColor = true;
+            this.orderNowButton.Click += new System.EventHandler(this.orderNowButton_Click);
             // 
             // genretextBox
             // 

@@ -135,6 +135,14 @@ namespace supermarket_app
             return productlist.getDataSource();
         }
 
+        internal void orderNowButtonPressed(ListBox orderListBox)
+        {
+            foreach (var item in orderListBox.Items)
+            {
+                productlist.updateQuantity(item, "return");
+            }
+        }
+
         internal void sellButtonpressed(ListBox cartListBox)
         {
             foreach (var item in cartListBox.Items)
