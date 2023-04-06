@@ -242,6 +242,7 @@
             this.reprintButton.TabIndex = 5;
             this.reprintButton.Text = "Reprint Receipt";
             this.reprintButton.UseVisualStyleBackColor = true;
+            this.reprintButton.Click += new System.EventHandler(this.reprintButton_Click);
             // 
             // returnButton
             // 
