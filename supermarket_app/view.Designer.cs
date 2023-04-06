@@ -79,7 +79,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.splitContainer6 = new System.Windows.Forms.SplitContainer();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.searchTextBox = new System.Windows.Forms.TextBox();
             this.totalSalesButton = new System.Windows.Forms.Button();
             this.toptenButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
@@ -730,7 +730,7 @@
             // 
             // splitContainer6.Panel2
             // 
-            this.splitContainer6.Panel2.Controls.Add(this.textBox1);
+            this.splitContainer6.Panel2.Controls.Add(this.searchTextBox);
             this.splitContainer6.Panel2.Controls.Add(this.totalSalesButton);
             this.splitContainer6.Panel2.Controls.Add(this.toptenButton);
             this.splitContainer6.Size = new System.Drawing.Size(970, 281);
@@ -753,15 +753,16 @@
             this.dataGridView2.Size = new System.Drawing.Size(769, 281);
             this.dataGridView2.TabIndex = 21;
             // 
-            // textBox1
+            // searchTextBox
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.searchTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(3, 1);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.PlaceholderText = "Search...";
-            this.textBox1.Size = new System.Drawing.Size(189, 23);
-            this.textBox1.TabIndex = 22;
+            this.searchTextBox.Location = new System.Drawing.Point(3, 1);
+            this.searchTextBox.Name = "searchTextBox";
+            this.searchTextBox.PlaceholderText = "Search...";
+            this.searchTextBox.Size = new System.Drawing.Size(189, 23);
+            this.searchTextBox.TabIndex = 22;
+            this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
             // 
             // totalSalesButton
             // 
@@ -852,7 +853,7 @@
         private SplitContainer splitContainer3;
         private DataGridView dataGridView2;
         private Button orderNowButton;
-        private TextBox textBox1;
+        private TextBox searchTextBox;
         private Button deleteProductButton;
         private Button toptenButton;
         private Button addProductButton;

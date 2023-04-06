@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace supermarket_app
 {
@@ -157,6 +159,51 @@ namespace supermarket_app
         {
             int productID = int.Parse(item.ToString().Split('\t')[0]);
             return productlist.getQuantity(productID);
+        }
+
+        internal object searchFor(string text)
+        {
+            BindingList<Product> tmpProductList = new BindingList<Product>();
+            BindingSource tmpDataSource = new BindingSource();
+            tmpDataSource.DataSource = tmpProductList;
+            foreach (var product in productlist.getProducts())
+            {
+                if (product.Name.ToLower().Contains(text.ToLower()))
+                {
+                    tmpProductList.Add(product);
+                }
+                else if (product.Type.ToLower().Contains(text.ToLower()))
+                {
+                    tmpProductList.Add(product);
+                }
+                else if (product.Author.ToLower().Contains(text.ToLower()))
+                {
+                    tmpProductList.Add(product);
+                }
+                else if (product.Genre.ToLower().Contains(text.ToLower()))
+                {
+                    tmpProductList.Add(product);
+                }
+                else if (product.Format.ToLower().Contains(text.ToLower()))
+                {
+                    tmpProductList.Add(product);
+                }
+                else if (product.Language.ToLower().Contains(text.ToLower()))
+                {
+                    tmpProductList.Add(product);
+                }
+                else if (product.Platform.ToLower().Contains(text.ToLower()))
+                {
+                    tmpProductList.Add(product);
+                }
+                else if (product.ProductID.ToString().Contains(text))
+                {
+                    tmpProductList.Add(product);
+                }
+            }
+
+
+            return tmpDataSource;
         }
     }
 }

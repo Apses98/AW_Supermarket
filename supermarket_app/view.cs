@@ -295,6 +295,17 @@ namespace supermarket_app
             updateDataGridView();
         }
 
-        
+        private void searchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (searchTextBox.Text == "")
+            {
+                updateDataGridView();
+            }
+            else
+            {
+                dataGridView2.DataSource = controller.searchFor(searchTextBox.Text);
+                dataGridView2.Refresh();
+            }
+        }
     }
 }

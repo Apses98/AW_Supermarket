@@ -253,5 +253,14 @@ namespace supermarket_app
             return 0;
         }
 
+        internal List<Product> getProducts()
+        {
+            List<Product> products = new List<Product>();
+            foreach (var product in productList)
+            {
+                products.Add(product);
+            }
+            return products;
+        }
     }
 }
