@@ -51,7 +51,8 @@ namespace supermarket_app
                             Language    = line.Split(',').ElementAt(6),
                             Platform    = line.Split(',').ElementAt(7),
                             PlayTime    = line.Split(',').ElementAt(8),
-                            Quantity   = int.Parse(line.Split(',').ElementAt(9)),
+                            Quantity    = int.Parse(line.Split(',').ElementAt(9)),
+                            sold        = int.Parse(line.Split(',').ElementAt(10)),
                             Type = line.Split(',').Last()
                         });
 
@@ -99,7 +100,7 @@ namespace supermarket_app
             foreach (var product in productList)
             {
                 result +=
-                    
+
                     product.ProductID.ToString() +
                     ',' +
                     product.Name +
@@ -119,6 +120,8 @@ namespace supermarket_app
                     product.PlayTime +
                     ',' +
                     product.Quantity +
+                    ',' +
+                    product.sold +
                     ',' +
                     product.Type +
                     
@@ -144,8 +147,9 @@ namespace supermarket_app
                 Platform = platform,
                 PlayTime = playtime,
                 Quantity = inventory,
-                Type = productType
-            });
+                Type = productType,
+                sold = 0
+            }); ;
         }
 
         internal bool isProductIDValid(int productID)
@@ -200,5 +204,54 @@ namespace supermarket_app
             }
             
         }
+
+        internal int getQuantity(int productID)
+        {
+            foreach (var product in productList)
+            {
+                if (product.ProductID == productID)
+                {
+                    return product.Quantity;
+                }
+            }
+            return 0;
+        }
+
+        internal void updateSold(object item, string operation)
+        {
+            if (operation == "sell")
+            {
+                for (int i = 0; i < productList.Count; i++)
+                {
+                    if (productList.ElementAt(i).ProductID == int.Parse(item.ToString().Split('\t')[0]))
+                    {
+                        productList.ElementAt(i).sold += int.Parse(item.ToString().Split('\t')[2].Split('x')[1]);
+                    }
+                }
+            }
+            else if (operation == "return")
+            {
+                for (int i = 0; i < productList.Count; i++)
+                {
+                    if (productList.ElementAt(i).ProductID == int.Parse(item.ToString().Split('\t')[0]))
+                    {
+                        productList.ElementAt(i).sold -= int.Parse(item.ToString().Split('\t')[2].Split('x')[1]);
+                    }
+                }
+            }
+        }
+
+        internal int getSold(int productID)
+        {
+            foreach (var product in productList)
+            {
+                if (product.ProductID == productID)
+                {
+                    return product.sold;
+                }
+            }
+            return 0;
+        }
+
     }
 }

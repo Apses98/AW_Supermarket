@@ -108,6 +108,7 @@ namespace supermarket_app
         }
 
 
+
         internal void deleteProductButtonPressed(DataGridViewSelectedRowCollection selectedRows)
         {
             int productID;
@@ -143,12 +144,19 @@ namespace supermarket_app
             }
         }
 
-        internal void sellButtonpressed(ListBox cartListBox)
+        internal void sell_returnButtonPressed(ListBox cartListBox, string operation)
         {
             foreach (var item in cartListBox.Items)
             {
-                productlist.updateQuantity(item, "sell");
+                productlist.updateQuantity(item, operation);
+                productlist.updateSold(item, operation);
             }
+        }
+
+        internal int getQuantity(object item)
+        {
+            int productID = int.Parse(item.ToString().Split('\t')[0]);
+            return productlist.getQuantity(productID);
         }
     }
 }

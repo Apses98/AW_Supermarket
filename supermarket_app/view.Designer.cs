@@ -33,12 +33,14 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.cartListBox = new System.Windows.Forms.ListBox();
+            this.addToCartButton = new System.Windows.Forms.Button();
+            this.removeFromCartButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.TotalLabel = new System.Windows.Forms.Label();
-            this.removeFromCartButton = new System.Windows.Forms.Button();
             this.reprintButton = new System.Windows.Forms.Button();
             this.returnButton = new System.Windows.Forms.Button();
             this.sellButton = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.inventoryTab = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
@@ -146,9 +148,10 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.label15);
             this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
             this.splitContainer1.Size = new System.Drawing.Size(970, 707);
-            this.splitContainer1.SplitterDistance = 332;
+            this.splitContainer1.SplitterDistance = 391;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -160,16 +163,17 @@
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.Controls.Add(this.cartListBox);
+            this.splitContainer2.Panel1.Controls.Add(this.addToCartButton);
+            this.splitContainer2.Panel1.Controls.Add(this.removeFromCartButton);
             this.splitContainer2.Panel1.Controls.Add(this.label1);
             // 
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.TotalLabel);
-            this.splitContainer2.Panel2.Controls.Add(this.removeFromCartButton);
             this.splitContainer2.Panel2.Controls.Add(this.reprintButton);
             this.splitContainer2.Panel2.Controls.Add(this.returnButton);
             this.splitContainer2.Panel2.Controls.Add(this.sellButton);
-            this.splitContainer2.Size = new System.Drawing.Size(970, 332);
+            this.splitContainer2.Size = new System.Drawing.Size(970, 391);
             this.splitContainer2.SplitterDistance = 727;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -182,8 +186,30 @@
             this.cartListBox.ItemHeight = 15;
             this.cartListBox.Location = new System.Drawing.Point(5, 28);
             this.cartListBox.Name = "cartListBox";
-            this.cartListBox.Size = new System.Drawing.Size(719, 289);
+            this.cartListBox.Size = new System.Drawing.Size(719, 304);
             this.cartListBox.TabIndex = 2;
+            // 
+            // addToCartButton
+            // 
+            this.addToCartButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.addToCartButton.Location = new System.Drawing.Point(314, 344);
+            this.addToCartButton.Name = "addToCartButton";
+            this.addToCartButton.Size = new System.Drawing.Size(202, 36);
+            this.addToCartButton.TabIndex = 6;
+            this.addToCartButton.Text = "Add to Cart";
+            this.addToCartButton.UseVisualStyleBackColor = true;
+            this.addToCartButton.Click += new System.EventHandler(this.addToCartButton_Click);
+            // 
+            // removeFromCartButton
+            // 
+            this.removeFromCartButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.removeFromCartButton.Location = new System.Drawing.Point(522, 344);
+            this.removeFromCartButton.Name = "removeFromCartButton";
+            this.removeFromCartButton.Size = new System.Drawing.Size(202, 36);
+            this.removeFromCartButton.TabIndex = 6;
+            this.removeFromCartButton.Text = "Remove From Cart";
+            this.removeFromCartButton.UseVisualStyleBackColor = true;
+            this.removeFromCartButton.Click += new System.EventHandler(this.removeFromCartButton_Click);
             // 
             // label1
             // 
@@ -200,29 +226,17 @@
             this.TotalLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.TotalLabel.AutoSize = true;
             this.TotalLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.TotalLabel.Location = new System.Drawing.Point(5, 297);
+            this.TotalLabel.Location = new System.Drawing.Point(5, 356);
             this.TotalLabel.Name = "TotalLabel";
             this.TotalLabel.Size = new System.Drawing.Size(61, 20);
             this.TotalLabel.TabIndex = 4;
             this.TotalLabel.Text = "Total: 0";
             // 
-            // removeFromCartButton
-            // 
-            this.removeFromCartButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.removeFromCartButton.Location = new System.Drawing.Point(5, 209);
-            this.removeFromCartButton.Name = "removeFromCartButton";
-            this.removeFromCartButton.Size = new System.Drawing.Size(231, 56);
-            this.removeFromCartButton.TabIndex = 6;
-            this.removeFromCartButton.Text = "Remove From Cart";
-            this.removeFromCartButton.UseVisualStyleBackColor = true;
-            this.removeFromCartButton.Click += new System.EventHandler(this.removeFromCartButton_Click);
-            // 
             // reprintButton
             // 
             this.reprintButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.reprintButton.Location = new System.Drawing.Point(5, 147);
+            this.reprintButton.Location = new System.Drawing.Point(5, 206);
             this.reprintButton.Name = "reprintButton";
             this.reprintButton.Size = new System.Drawing.Size(231, 56);
             this.reprintButton.TabIndex = 5;
@@ -236,10 +250,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.returnButton.Location = new System.Drawing.Point(5, 85);
             this.returnButton.Name = "returnButton";
-            this.returnButton.Size = new System.Drawing.Size(231, 56);
+            this.returnButton.Size = new System.Drawing.Size(231, 115);
             this.returnButton.TabIndex = 4;
             this.returnButton.Text = "Return";
             this.returnButton.UseVisualStyleBackColor = true;
+            this.returnButton.Click += new System.EventHandler(this.returnButton_Click);
             // 
             // sellButton
             // 
@@ -253,24 +268,35 @@
             this.sellButton.UseVisualStyleBackColor = true;
             this.sellButton.Click += new System.EventHandler(this.sellButton_Click);
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label15.Location = new System.Drawing.Point(5, 7);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(390, 19);
+            this.label15.TabIndex = 2;
+            this.label15.Text = "Select a product then press Add to cart or Return button!";
+            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 29);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(970, 371);
+            this.dataGridView1.Size = new System.Drawing.Size(970, 283);
             this.dataGridView1.TabIndex = 1;
-            this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
             // 
             // inventoryTab
             // 
@@ -348,7 +374,8 @@
             // 
             // orderListBox
             // 
-            this.orderListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.orderListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.orderListBox.FormattingEnabled = true;
             this.orderListBox.ItemHeight = 15;
@@ -359,9 +386,7 @@
             // 
             // RemoveFromOrderButton
             // 
-            this.RemoveFromOrderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RemoveFromOrderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.RemoveFromOrderButton.Location = new System.Drawing.Point(379, 347);
             this.RemoveFromOrderButton.Name = "RemoveFromOrderButton";
             this.RemoveFromOrderButton.Size = new System.Drawing.Size(126, 32);
@@ -372,8 +397,7 @@
             // 
             // addToOrderButton
             // 
-            this.addToOrderButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.addToOrderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.addToOrderButton.Location = new System.Drawing.Point(247, 347);
             this.addToOrderButton.Name = "addToOrderButton";
             this.addToOrderButton.Size = new System.Drawing.Size(126, 32);
@@ -394,8 +418,7 @@
             // 
             // orderNowButton
             // 
-            this.orderNowButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.orderNowButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.orderNowButton.Location = new System.Drawing.Point(511, 347);
             this.orderNowButton.Name = "orderNowButton";
             this.orderNowButton.Size = new System.Drawing.Size(126, 32);
@@ -456,8 +479,7 @@
             // 
             // deleteProductButton
             // 
-            this.deleteProductButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.deleteProductButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.deleteProductButton.Location = new System.Drawing.Point(151, 347);
             this.deleteProductButton.Name = "deleteProductButton";
             this.deleteProductButton.Size = new System.Drawing.Size(131, 32);
@@ -468,8 +490,7 @@
             // 
             // addProductButton
             // 
-            this.addProductButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.addProductButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.addProductButton.Location = new System.Drawing.Point(11, 347);
             this.addProductButton.Name = "addProductButton";
             this.addProductButton.Size = new System.Drawing.Size(134, 32);
@@ -779,6 +800,7 @@
             this.checkoutTab.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
@@ -868,5 +890,7 @@
         private Label label14;
         private ListBox orderListBox;
         private Button RemoveFromOrderButton;
+        private Button addToCartButton;
+        private Label label15;
     }
 }

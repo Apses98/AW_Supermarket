@@ -21,7 +21,6 @@ namespace supermarket_app
         private void productTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             updateTextboxesEnabledStatus(productTypeComboBox.SelectedIndex);
-            
         }
 
         // Updates the Enabled Status of the textboxes in the inventory tab
@@ -95,13 +94,37 @@ namespace supermarket_app
             controller.FormColsing();
         }
 
+        private void addToCartButton_Click(object sender, EventArgs e)
+        {
+            updateCart();
+        }
+
+        private void sellButton_Click(object sender, EventArgs e)
+        {
+            
+            if (cartListBox.Items.Count == 0)
+                return;
+            foreach (var item in cartListBox.Items)
+            {
+                if (controller.getQuantity(item) == 0)
+                {
+                    MessageBox.Show($"Product {item.ToString().Split('\t')[1]} is out of stock!");
+                    return;
+                }
+                else if (int.Parse(item.ToString().Split('\t')[2].Split('x')[1]) > controller.getQuantity(item))
+                {
+                    MessageBox.Show($"Error!, There is only {controller.getQuantity(item)} piece of {item.ToString().Split('\t')[1]} in the inventory!\nYou can not sell more than what you have in the inventory!");
+                    return;
+                }
+            }
+
+            controller.sell_returnButtonPressed(cartListBox, "sell");
+            cartListBox.Items.Clear();
+            updateDataGridView();
+        }
         private void updateCart()
         {
-            if (int.Parse(dataGridView1.SelectedRows[0].Cells[1].Value.ToString()) <= 0)
-            {
-                MessageBox.Show("Product out of stock!");
-                return;
-            }
+            
             int x = 1;
             if (cartListBox.Items.Count == 0)
             {
@@ -114,19 +137,8 @@ namespace supermarket_app
                 if (cartListBox.Items[i].ToString().Split('\t')[1] == dataGridView1.SelectedRows[0].Cells[3].Value.ToString())
                 {
                     x = int.Parse(cartListBox.Items[i].ToString().Split('\t')[2].Split('x')[1].ToString()) + 1;
-                    if (x <= int.Parse(dataGridView1.SelectedRows[0].Cells[1].Value.ToString()))
-                    {
                         cartListBox.Items.Add(dataGridView1.SelectedRows[0].Cells[0].Value.ToString() + '\t' + dataGridView1.SelectedRows[0].Cells[3].Value + "\t" + dataGridView1.SelectedRows[0].Cells[4].Value + " x " + x.ToString());
                         cartListBox.Items.RemoveAt(i);
-                    }
-                    else
-                    {
-                        x--;
-                        MessageBox.Show($"Can't add more!\nThere is only {x} piece of this product in the inventory!");
-                        return;
-                    }
-                    
-                        
                 }
                 else
                 {
@@ -141,10 +153,7 @@ namespace supermarket_app
             updateTotalPrice();
         }
 
-        private void dataGridView1_Click(object sender, EventArgs e)
-        {
-            updateCart();
-        }
+        
 
         private void removeFromCartButton_Click(object sender, EventArgs e)
         {
@@ -225,15 +234,6 @@ namespace supermarket_app
             updateNewOrderList();
         }
 
-        private void sellButton_Click(object sender, EventArgs e)
-        {
-            if (cartListBox.Items.Count == 0)
-                return;
-            controller.sellButtonpressed(cartListBox);
-            cartListBox.Items.Clear();
-            updateDataGridView();
-        }
-
 
         private void updateNewOrderList()
         {
@@ -285,5 +285,16 @@ namespace supermarket_app
             orderListBox.Items.Clear();
             updateDataGridView();
         }
+
+        private void returnButton_Click(object sender, EventArgs e)
+        {
+            if (cartListBox.Items.Count == 0)
+                return;
+            controller.sell_returnButtonPressed(cartListBox, "return");
+            cartListBox.Items.Clear();
+            updateDataGridView();
+        }
+
+        
     }
 }

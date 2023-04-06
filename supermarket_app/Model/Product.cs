@@ -14,5 +14,6 @@
         public string? Platform { get; set; }
         public string? PlayTime { get; set; }
 
+        public int sold { get; set; }
     }
 }
