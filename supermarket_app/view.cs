@@ -307,5 +307,10 @@ namespace supermarket_app
                 dataGridView2.Refresh();
             }
         }
+
+        private void toptenButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(controller.getTop10());
+        }
     }
 }

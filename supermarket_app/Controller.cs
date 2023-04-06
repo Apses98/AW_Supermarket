@@ -205,5 +205,37 @@ namespace supermarket_app
 
             return tmpDataSource;
         }
+
+        internal string getTop10()
+        {
+            List<Product> top10 = new List<Product>(), tmp = new List<Product>();
+            tmp = productlist.getProducts();
+            int mostSold = 0, mostSold_index = 0;
+            string result = "";
+            
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < tmp.Count; j++)
+                {
+                    if (tmp[j].sold > mostSold)
+                    {
+                        mostSold = tmp[j].sold;
+                        mostSold_index = j;
+                    }
+                }
+                try
+                {
+                    top10.Add(tmp.ElementAt(mostSold_index));
+                    tmp.RemoveAt(mostSold_index);
+                    result += $"{top10[i].Name} \n";
+                }
+                catch (Exception)
+                {
+                    
+                }
+
+            }
+            return result;
+        }
     }
 }

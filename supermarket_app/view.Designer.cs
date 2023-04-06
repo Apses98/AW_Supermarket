@@ -785,6 +785,7 @@
             this.toptenButton.TabIndex = 23;
             this.toptenButton.Text = "Top 10 products";
             this.toptenButton.UseVisualStyleBackColor = true;
+            this.toptenButton.Click += new System.EventHandler(this.toptenButton_Click);
             // 
             // mainForm
             // 
