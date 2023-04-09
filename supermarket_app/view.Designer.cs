@@ -79,6 +79,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.splitContainer6 = new System.Windows.Forms.SplitContainer();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.monthRadioButton = new System.Windows.Forms.RadioButton();
+            this.yearRadioButton = new System.Windows.Forms.RadioButton();
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.totalSalesButton = new System.Windows.Forms.Button();
             this.toptenButton = new System.Windows.Forms.Button();
@@ -628,6 +630,7 @@
             this.playtimetextBox.Enabled = false;
             this.playtimetextBox.Location = new System.Drawing.Point(107, 289);
             this.playtimetextBox.Name = "playtimetextBox";
+            this.playtimetextBox.PlaceholderText = "In minutes";
             this.playtimetextBox.Size = new System.Drawing.Size(175, 23);
             this.playtimetextBox.TabIndex = 18;
             // 
@@ -731,6 +734,8 @@
             // 
             // splitContainer6.Panel2
             // 
+            this.splitContainer6.Panel2.Controls.Add(this.monthRadioButton);
+            this.splitContainer6.Panel2.Controls.Add(this.yearRadioButton);
             this.splitContainer6.Panel2.Controls.Add(this.searchTextBox);
             this.splitContainer6.Panel2.Controls.Add(this.totalSalesButton);
             this.splitContainer6.Panel2.Controls.Add(this.toptenButton);
@@ -754,6 +759,28 @@
             this.dataGridView2.Size = new System.Drawing.Size(769, 281);
             this.dataGridView2.TabIndex = 21;
             // 
+            // monthRadioButton
+            // 
+            this.monthRadioButton.AutoSize = true;
+            this.monthRadioButton.Location = new System.Drawing.Point(73, 88);
+            this.monthRadioButton.Name = "monthRadioButton";
+            this.monthRadioButton.Size = new System.Drawing.Size(61, 19);
+            this.monthRadioButton.TabIndex = 25;
+            this.monthRadioButton.Text = "Month";
+            this.monthRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // yearRadioButton
+            // 
+            this.yearRadioButton.AutoSize = true;
+            this.yearRadioButton.Checked = true;
+            this.yearRadioButton.Location = new System.Drawing.Point(6, 88);
+            this.yearRadioButton.Name = "yearRadioButton";
+            this.yearRadioButton.Size = new System.Drawing.Size(47, 19);
+            this.yearRadioButton.TabIndex = 25;
+            this.yearRadioButton.TabStop = true;
+            this.yearRadioButton.Text = "Year";
+            this.yearRadioButton.UseVisualStyleBackColor = true;
+            // 
             // searchTextBox
             // 
             this.searchTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -769,18 +796,19 @@
             // 
             this.totalSalesButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalSalesButton.Location = new System.Drawing.Point(3, 96);
+            this.totalSalesButton.Location = new System.Drawing.Point(3, 169);
             this.totalSalesButton.Name = "totalSalesButton";
             this.totalSalesButton.Size = new System.Drawing.Size(189, 53);
             this.totalSalesButton.TabIndex = 24;
             this.totalSalesButton.Text = "Total Sales";
             this.totalSalesButton.UseVisualStyleBackColor = true;
+            this.totalSalesButton.Click += new System.EventHandler(this.totalSalesButton_Click);
             // 
             // toptenButton
             // 
             this.toptenButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.toptenButton.Location = new System.Drawing.Point(3, 40);
+            this.toptenButton.Location = new System.Drawing.Point(3, 113);
             this.toptenButton.Name = "toptenButton";
             this.toptenButton.Size = new System.Drawing.Size(189, 50);
             this.toptenButton.TabIndex = 23;
@@ -794,7 +822,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 741);
             this.Controls.Add(this.tabControl1);
-            this.MinimumSize = new System.Drawing.Size(1000, 780);
+            this.MinimumSize = new System.Drawing.Size(1000, 766);
             this.Name = "mainForm";
             this.Text = "AW Supermarket";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.mainForm_FormClosing);
@@ -895,5 +923,7 @@
         private Button RemoveFromOrderButton;
         private Button addToCartButton;
         private Label label15;
+        private RadioButton monthRadioButton;
+        private RadioButton yearRadioButton;
     }
 }

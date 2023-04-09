@@ -91,7 +91,20 @@ namespace supermarket_app
                 MessageBox.Show("Quantity textbox should be a number!");
                 return false;
             }
-
+            try
+            {
+                if (int.Parse(playtime) < 0)
+                {
+                    MessageBox.Show("PlayTime can not be negative!");
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("PlayTime textbox should be a number!");
+                return false;
+            }
+            playtime += " min";
             productlist.addProduct(
             productID,
             name,
@@ -131,6 +144,7 @@ namespace supermarket_app
         internal void FormColsing()
         {
             productlist.saveFile();
+            productlist.SaveSold();
         }
 
         internal object getDataSource()
@@ -148,6 +162,9 @@ namespace supermarket_app
 
         internal void sell_returnButtonPressed(ListBox cartListBox, string operation)
         {
+            if (cartListBox.Items.Count == 0)
+                 return;
+
             foreach (var item in cartListBox.Items)
             {
                 productlist.updateQuantity(item, operation);
@@ -206,36 +223,98 @@ namespace supermarket_app
             return tmpDataSource;
         }
 
-        internal string getTop10()
+        internal string top10AndTotalSales(bool yearChecked, bool isTop10)
         {
-            List<Product> top10 = new List<Product>(), tmp = new List<Product>();
-            tmp = productlist.getProducts();
-            int mostSold = 0, mostSold_index = 0;
+
+            List<string> top10 = new List<string>(), tmp = new List<string>();
+            top10 = productlist.getAllSoldProducts();
+            int changed = 0, numOfSold = 0,mostSold = 0, mostSold_index = -1, arrSize = 10 ;
             string result = "";
             
-            for (int i = 0; i < 10; i++)
+
+            // move relevant data to tmp list
+            for (int i = 0; i < top10.Count; i++)
+            {
+                if (yearChecked)
+                {
+                    // get all the lines for the current year 
+                    if (top10[i].Split(',')[0].Contains(DateTime.Now.Year.ToString() ))
+                    {
+                        tmp.Add(top10[i]);
+                    }
+                }
+                else
+                {
+                    // Get all the lines for the currnet month
+                    if (top10[i].Split(',')[1].Contains(DateTime.Now.Month.ToString()))
+                    {
+                        tmp.Add(top10[i]);
+                    }
+                }
+                
+            }
+            // Clear top10 list
+            top10.Clear();
+
+            // check for dubblicates
+            for (int i = 0; i < tmp.Count; i++)
             {
                 for (int j = 0; j < tmp.Count; j++)
                 {
-                    if (tmp[j].sold > mostSold)
+                    if (tmp[i].Split(',')[2] == tmp[j].Split(',')[2] && i != j)
                     {
-                        mostSold = tmp[j].sold;
+                        numOfSold += int.Parse(tmp[j].Split(',')[4]);
+                        tmp.RemoveAt(j);
+                        changed = 1;
+                    }
+                }
+
+                if (changed == 1 && i < tmp.Count)
+                {
+                    changed = 0;
+                    tmp[i] =    tmp[i].Split(',')[0].ToString() +
+                                ',' +
+                                tmp[i].Split(',')[1].ToString() +
+                                ',' +
+                                tmp[i].Split(',')[2].ToString() +
+                                ',' +
+                                tmp[i].Split(',')[3].ToString() +
+                                ',' +
+                                numOfSold.ToString();
+                    numOfSold = 0;
+                }
+            }
+
+            if (!isTop10)
+            {
+                arrSize = tmp.Count;
+            }
+
+            // Get the values
+            for (int i = 0; i < arrSize; i++)
+            {
+                for (int j = 0; j < tmp.Count; j++)
+                {
+                    if (int.Parse(tmp[j].Split(',')[4]) > mostSold)
+                    {
+                        mostSold = int.Parse(tmp[j].Split(',')[4]);
                         mostSold_index = j;
                     }
                 }
-                try
+                if (mostSold_index != -1)
                 {
-                    top10.Add(tmp.ElementAt(mostSold_index));
+                    result += "Product ID: " + tmp[mostSold_index].Split(',')[2] + " Name: " + tmp[mostSold_index].Split(',')[3] + " Sold: " +tmp[mostSold_index].Split(',')[4] + "\n";
                     tmp.RemoveAt(mostSold_index);
-                    result += $"{top10[i].Name} \n";
+                    mostSold = 0;
+                    mostSold_index = -1;
                 }
-                catch (Exception)
-                {
-                    
-                }
-
+                
             }
+           
+
+
             return result;
+
         }
     }
 }

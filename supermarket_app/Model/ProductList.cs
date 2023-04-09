@@ -24,7 +24,22 @@ namespace supermarket_app
             
         }
 
-        
+        internal List<string> getAllSoldProducts()
+        {
+            List<string>? soldDatabase = new List<string>();
+            if (File.Exists("database1.csv"))
+            {
+                soldDatabase = System.IO.File.ReadAllText("database1.csv").Split('\r').ToList();
+                soldDatabase.RemoveAt(soldDatabase.Count() - 1);
+                return soldDatabase;
+            }
+            else
+            {
+                File.Create("database.csv").Close();
+                return soldDatabase;
+            }
+        }
+
         private void loadCSVFile()
         {
             /* loadCSVFile function -> loads a csv file (database.csv) which includes all information about the products in the supermarket.
@@ -52,7 +67,6 @@ namespace supermarket_app
                             Platform    = line.Split(',').ElementAt(7),
                             PlayTime    = line.Split(',').ElementAt(8),
                             Quantity    = int.Parse(line.Split(',').ElementAt(9)),
-                            sold        = int.Parse(line.Split(',').ElementAt(10)),
                             Type = line.Split(',').Last()
                         });
 
@@ -121,17 +135,50 @@ namespace supermarket_app
                     ',' +
                     product.Quantity +
                     ',' +
-                    product.sold +
-                    ',' +
                     product.Type +
                     
                     '\r';
             }
-            
+            if (!File.Exists("database.csv"))
+            {
+                File.Create("database.csv").Close();
+            }
             System.IO.File.WriteAllText("database.csv", result);
-            
         }
 
+        internal void SaveSold()
+        {
+            /* Saves the number of sold products with product id and date in the productList to the file/database (database1.csv) */
+            string result = "";
+            string year = DateTime.Now.Year.ToString();
+            string month = DateTime.Now.Month.ToString();
+            foreach (var product in productList)
+            {
+                if (product.sold != 0)
+                {
+                    result +=
+                    year +
+                    ',' +
+                    month +
+                    ',' +
+                    product.ProductID.ToString() +
+                    ',' +
+                    product.Name +
+                    ',' +
+                    product.sold.ToString() +
+
+                    '\r';
+                }
+                product.sold = 0;
+            }
+            if (!File.Exists("database1.csv"))
+                File.Create("database1.csv").Close();
+
+
+            System.IO.File.AppendAllText("database1.csv", result);
+
+
+        }
         internal void addProduct(int productID, string name, int price, string author, string genre, string format, string language, string platform, string playtime, int inventory, string productType)
         {
             /* Adds a new Product to the productList */
@@ -239,18 +286,6 @@ namespace supermarket_app
                     }
                 }
             }
-        }
-
-        internal int getSold(int productID)
-        {
-            foreach (var product in productList)
-            {
-                if (product.ProductID == productID)
-                {
-                    return product.sold;
-                }
-            }
-            return 0;
         }
 
         internal List<Product> getProducts()

@@ -49,8 +49,7 @@ namespace supermarket_app
         private void sellButton_Click(object sender, EventArgs e)
         {
             
-            if (cartListBox.Items.Count == 0)
-                return;
+            
             foreach (var item in cartListBox.Items)
             {
                 if (controller.getQuantity(item) == 0)
@@ -70,8 +69,6 @@ namespace supermarket_app
             cartListBox.Items.Clear();
             updateDataGridView();
         }
-
-
 
         private void removeFromCartButton_Click(object sender, EventArgs e)
         {
@@ -103,8 +100,34 @@ namespace supermarket_app
 
         private void deleteProductButton_Click(object sender, EventArgs e)
         {
+            bool quantityNotZero = false;
+            DialogResult result = DialogResult.Yes;
             if (dataGridView2.SelectedRows.Count > 0)
             {
+                for (int i = 0; i < dataGridView2.SelectedRows.Count; i++)
+                {
+                    try
+                    {
+                        if (int.Parse(dataGridView2.SelectedRows[i].Cells[1].Value.ToString()) > 0)
+                        {
+                            quantityNotZero = true;
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        return;
+                    }
+                    
+                }
+                if (quantityNotZero)
+                {
+                    result = MessageBox.Show(
+                        "You are trying to delete products that have quantity more than zero in the inventory\nDelete anyway?",
+                        "Delete product(s)",
+                        MessageBoxButtons.YesNo);
+                }
+                if (result != DialogResult.Yes)
+                    return;
                 controller.deleteProductButtonPressed(dataGridView2.SelectedRows);
             }
             else
@@ -162,7 +185,7 @@ namespace supermarket_app
 
         private void toptenButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(controller.getTop10());
+            MessageBox.Show(controller.top10AndTotalSales(yearRadioButton.Checked, true));
         }
 
         private void reprintButton_Click(object sender, EventArgs e)
@@ -248,6 +271,7 @@ namespace supermarket_app
             languagetextBox.Text = string.Empty;
             platformtextBox.Text = string.Empty;
             playtimetextBox.Text = string.Empty;
+            quantityTextBox.Text = string.Empty;
 
         }
 
@@ -265,7 +289,15 @@ namespace supermarket_app
             {
                 if (cartListBox.Items[i].ToString().Split('\t')[1] == dataGridView1.SelectedRows[0].Cells[3].Value.ToString())
                 {
-                    x = int.Parse(cartListBox.Items[i].ToString().Split('\t')[2].Split('x')[1].ToString()) + 1;
+                    try
+                    {
+                        x = int.Parse(cartListBox.Items[i].ToString().Split('\t')[2].Split('x')[1].ToString()) + 1;
+                    }
+                    catch (Exception)
+                    {
+                        return;
+                    }
+                    
                     cartListBox.Items.Add(dataGridView1.SelectedRows[0].Cells[0].Value.ToString() + '\t' + dataGridView1.SelectedRows[0].Cells[3].Value + "\t" + dataGridView1.SelectedRows[0].Cells[4].Value + " x " + x.ToString());
                     cartListBox.Items.RemoveAt(i);
                 }
@@ -299,14 +331,22 @@ namespace supermarket_app
                 for (int j = 0; j < orderListBox.Items.Count; j++)
                 {
                     x = 1;
-                    if (int.Parse(dataGridView2.SelectedRows[i].Cells[0].Value.ToString()) == int.Parse(orderListBox.Items[j].ToString().Split('\t')[0]))
+                    try
                     {
-                        x += int.Parse(orderListBox.Items[j].ToString().Split('\t')[2].Split('x')[1]);
-                        orderListBox.Items.Add(dataGridView2.SelectedRows[i].Cells[0].Value.ToString() + '\t' + dataGridView2.SelectedRows[i].Cells[3].Value.ToString() + "\t" + " x " + x.ToString());
-                        orderListBox.Items.RemoveAt(j);
-                        noMatch = 1;
-                        break;
+                        if (int.Parse(dataGridView2.SelectedRows[i].Cells[0].Value.ToString()) == int.Parse(orderListBox.Items[j].ToString().Split('\t')[0]))
+                        {
+                            x += int.Parse(orderListBox.Items[j].ToString().Split('\t')[2].Split('x')[1]);
+                            orderListBox.Items.Add(dataGridView2.SelectedRows[i].Cells[0].Value.ToString() + '\t' + dataGridView2.SelectedRows[i].Cells[3].Value.ToString() + "\t" + " x " + x.ToString());
+                            orderListBox.Items.RemoveAt(j);
+                            noMatch = 1;
+                            break;
+                        }
                     }
+                    catch (Exception)
+                    {
+                        return;
+                    }
+                    
                 }
                 if (noMatch == 0)
                 {
@@ -345,7 +385,7 @@ namespace supermarket_app
             {
                 foreach (string product in listbox.Items)
                 {
-                    lastReceipt += $"{product.ToString()} \n";
+                    lastReceipt += $"{product} \n";
                 }
                 lastReceipt += $"{TotalLabel.Text} \n{dateTime} \nThank you for shoping with us!\nAW Supermarket";
             }
@@ -361,6 +401,9 @@ namespace supermarket_app
             pd.Print();
         }
 
- 
+        private void totalSalesButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(controller.top10AndTotalSales(yearRadioButton.Checked, false));
+        }
     }
 }
