@@ -4,10 +4,12 @@ namespace supermarket_app
 {
     internal class ProductList
     {
-        
+        /* Delarations */
         BindingList<Product> productList;
         BindingSource productlistSource;
         private List<string>? csvFile;
+
+        // Used as min and max boundaries to the product id random generator
         private const int MIN_PRODUCT_ID = 0, MAX_PRODUCT_ID = 99999;
         public ProductList()
         {
@@ -27,6 +29,8 @@ namespace supermarket_app
 
         internal List<string> getAllSoldProducts()
         {
+            /* Loads all the products that were sold from the database (database1.csv) file.
+             * Returns as a list of strings */
             List<string>? soldDatabase = new List<string>();
             if (File.Exists("database1.csv"))
             {
@@ -51,12 +55,20 @@ namespace supermarket_app
             if (File.Exists("database.csv"))
             {
                 csvFile = new List<string>();
-                csvFile = System.IO.File.ReadAllText("database.csv").Split('\r').ToList();
+                try
+                {
+                    csvFile = System.IO.File.ReadAllText("database.csv").Split('\r').ToList();
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+                
+                // Remove the last line which is an empty line!
                 csvFile.RemoveAt(csvFile.Count() - 1);
                 
                 foreach (string line in csvFile)
                 {
-                    
                     try
                     {
                         productList.Add(new Product
@@ -91,7 +103,7 @@ namespace supermarket_app
             }
             else
             {
-                File.Create("database.csv");
+                File.Create("database.csv").Close();
             }
         }
 
@@ -190,6 +202,7 @@ namespace supermarket_app
 
 
         }
+
         internal void addProduct(int productID, string name, int price, string author, string genre, string format, string language, string platform, string playtime, int inventory, string productType)
         {
             /* Adds a new Product to the productList */
@@ -239,7 +252,8 @@ namespace supermarket_app
 
         internal void updateQuantity(object item, string operation)
         {
-            /* Edits the Quantity of a product */
+            /* Edits the Quantity of a product 
+               this function increases or decreases the quantity based on the operation that is being preformed "sell or return"*/
             if (operation == "sell")
             {
                 for (int i = 0; i < productList.Count; i++)
@@ -283,6 +297,7 @@ namespace supermarket_app
 
         internal int getQuantity(int productID)
         {
+            /* Returns the quantity of a specific product! */
             foreach (var product in productList)
             {
                 if (product.ProductID == productID)
@@ -295,6 +310,7 @@ namespace supermarket_app
 
         internal void updateSold(object item, string operation)
         {
+            /* Update the number of the variable (Sold) based on the operation that is being preformed */
             if (operation == "sell")
             {
                 for (int i = 0; i < productList.Count; i++)
@@ -334,7 +350,8 @@ namespace supermarket_app
         }
 
         internal List<Product> getProducts()
-        {
+        { 
+            /* Returns all the products in the supermarket as a list of type Product */
             List<Product> products = new List<Product>();
             foreach (var product in productList)
             {

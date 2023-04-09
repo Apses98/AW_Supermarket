@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.CodeDom;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
@@ -16,6 +17,7 @@ namespace supermarket_app
 
         internal bool addProductButtonPressed(string productIDString, string name, string stringPrice, string author, string genre, string format, string language, string platform, string playtime, string productType, string stringQuantity)
         {
+            /* Checks the submitted fields and Adds a new product to the productlist */
             int productID = 0, inventory, price;
             if (productIDString == "")
             {
@@ -126,6 +128,7 @@ namespace supermarket_app
 
         internal void deleteProductButtonPressed(DataGridViewSelectedRowCollection selectedRows)
         {
+            /* Deletes selected product(s) from the product list */
             int productID;
             foreach (DataGridViewRow row in selectedRows)
             {
@@ -143,17 +146,20 @@ namespace supermarket_app
 
         internal void FormColsing()
         {
+            /* When the program is closing the program saves all the product and the selling data */
             productlist.saveFile();
             productlist.SaveSold();
         }
 
         internal object getDataSource()
         {
+            /* returns the datasource of the bindingList */
             return productlist.getDataSource();
         }
 
         internal void orderNowButtonPressed(ListBox orderListBox)
         {
+            /* updates the quantity of choosen product(s), (this stimulates getting a new order to the supermarket) */
             foreach (var item in orderListBox.Items)
             {
                 productlist.updateQuantity(item, "return");
@@ -162,6 +168,7 @@ namespace supermarket_app
 
         internal void sell_returnButtonPressed(ListBox cartListBox, string operation)
         {
+            /* Edites the quantity based on the operation being preformed (selling or returning a product) */
             if (cartListBox.Items.Count == 0)
                  return;
 
@@ -174,6 +181,7 @@ namespace supermarket_app
 
         internal int getQuantity(object item)
         {
+            /* Returns the quantity of a product */
             int productID;
             try
             {
@@ -189,6 +197,7 @@ namespace supermarket_app
 
         internal object searchFor(string text)
         {
+            /* Preforms a serach in the bindinglist(the list of products) and returns a tmp bindinglist containing the search result */
             BindingList<Product> tmpProductList = new BindingList<Product>();
             BindingSource tmpDataSource = new BindingSource();
             tmpDataSource.DataSource = tmpProductList;
@@ -234,7 +243,7 @@ namespace supermarket_app
 
         internal string top10AndTotalSales(bool yearChecked, bool isTop10)
         {
-
+            /* Returns a string with the top10 products per (month or year) or the total sales of the current month or year; */
             List<string> top10 = new List<string>(), tmp = new List<string>();
             top10 = productlist.getAllSoldProducts();
             int changed = 0, numOfSold = 0,mostSold = 0, mostSold_index = -1, arrSize = 10 ;
@@ -265,7 +274,7 @@ namespace supermarket_app
             // Clear top10 list
             top10.Clear();
 
-            // check for dubblicates
+            // check for dubblicates - conmbine and adjust the numbers
             for (int i = 0; i < tmp.Count; i++)
             {
                 for (int j = 0; j < tmp.Count; j++)
@@ -308,7 +317,7 @@ namespace supermarket_app
                 arrSize = tmp.Count;
             }
 
-            // Get the values
+            // Order the items and add them to the result variable
             for (int i = 0; i < arrSize; i++)
             {
                 for (int j = 0; j < tmp.Count; j++)

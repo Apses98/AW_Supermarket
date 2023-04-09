@@ -48,7 +48,7 @@ namespace supermarket_app
 
         private void sellButton_Click(object sender, EventArgs e)
         {
-            
+            /* Checks the quantity of each item in the cart before selling */
             
             foreach (var item in cartListBox.Items)
             {
@@ -71,6 +71,7 @@ namespace supermarket_app
                 }
                 
             }
+            // Sell then print receipt
             controller.sell_returnButtonPressed(cartListBox, "sell");
             lastReceipt = " ";
             printReceipt(cartListBox);
@@ -86,6 +87,7 @@ namespace supermarket_app
 
         private void addProductButton_Click(object sender, EventArgs e)
         {
+            /* Adds new product and clears the textboxes afterwards */
             if (controller.addProductButtonPressed(
                 productIDtextBox.Text,
                 nametextBox.Text,
@@ -108,6 +110,8 @@ namespace supermarket_app
 
         private void deleteProductButton_Click(object sender, EventArgs e)
         {
+            /* Deletes a product from the product list 
+             * Checks if the quantity is not zero and asks the user if they really want to delete */
             bool quantityNotZero = false;
             DialogResult result = DialogResult.Yes;
             if (dataGridView2.SelectedRows.Count > 0)
@@ -202,9 +206,9 @@ namespace supermarket_app
         }
 
         /* Other functions */
-        // Updates the Enabled Status of the textboxes in the inventory tab
         private void updateTextboxesEnabledStatus(int selectedIndex)
         {
+            /* Updates the Enabled Status of the textboxes in the inventory tab */
             if (selectedIndex == 0)
             {
                 productIDtextBox.Enabled = true;
@@ -394,6 +398,7 @@ namespace supermarket_app
 
         private void printReceipt(ListBox listbox)
         {
+            /* Prints the last receipt using the default printer or microsoft print to pdf printer */
             if (lastReceipt == string.Empty)
                 return;
 
