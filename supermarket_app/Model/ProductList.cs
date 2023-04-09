@@ -4,6 +4,7 @@ namespace supermarket_app
 {
     internal class ProductList
     {
+        
         BindingList<Product> productList;
         BindingSource productlistSource;
         private List<string>? csvFile;
@@ -55,20 +56,30 @@ namespace supermarket_app
                 
                 foreach (string line in csvFile)
                 {
-                    List<string> test = line.Split(',').ToList();
-                        productList.Add(new Product { 
-                            ProductID   = int.Parse(line.Split(',').ElementAt(0)), 
-                            Name        = line.Split(',').ElementAt(1), 
-                            Price       = int.Parse(line.Split(',').ElementAt(2)), 
-                            Author      = line.Split(',').ElementAt(3),
-                            Genre       = line.Split(',').ElementAt(4),
-                            Format      = line.Split(',').ElementAt(5),
-                            Language    = line.Split(',').ElementAt(6),
-                            Platform    = line.Split(',').ElementAt(7),
-                            PlayTime    = line.Split(',').ElementAt(8),
-                            Quantity    = int.Parse(line.Split(',').ElementAt(9)),
+                    
+                    try
+                    {
+                        productList.Add(new Product
+                        {
+                            ProductID = int.Parse(line.Split(',').ElementAt(0)),
+                            Name = line.Split(',').ElementAt(1),
+                            Price = int.Parse(line.Split(',').ElementAt(2)),
+                            Author = line.Split(',').ElementAt(3),
+                            Genre = line.Split(',').ElementAt(4),
+                            Format = line.Split(',').ElementAt(5),
+                            Language = line.Split(',').ElementAt(6),
+                            Platform = line.Split(',').ElementAt(7),
+                            PlayTime = line.Split(',').ElementAt(8),
+                            Quantity = int.Parse(line.Split(',').ElementAt(9)),
                             Type = line.Split(',').Last()
                         });
+                    }
+                    catch (Exception)
+                    {
+
+                        return;
+                    }
+                    
 
                     if (line.Split(',').ElementAt(0) == "")
                     {
@@ -233,20 +244,38 @@ namespace supermarket_app
             {
                 for (int i = 0; i < productList.Count; i++)
                 {
-                    if (productList.ElementAt(i).ProductID == int.Parse(item.ToString().Split('\t')[0]))
+                    try
                     {
-                        productList.ElementAt(i).Quantity -= int.Parse(item.ToString().Split('\t')[2].Split('x')[1]);
+                        if (productList.ElementAt(i).ProductID == int.Parse(item.ToString().Split('\t')[0]))
+                        {
+                            productList.ElementAt(i).Quantity -= int.Parse(item.ToString().Split('\t')[2].Split('x')[1]);
+                        }
                     }
+                    catch (Exception)
+                    {
+
+                        return;
+                    }
+                    
                 }
             }
             else if (operation == "return")
             {
                 for (int i = 0; i < productList.Count; i++)
                 {
-                    if (productList.ElementAt(i).ProductID == int.Parse(item.ToString().Split('\t')[0]))
+                    try
                     {
-                        productList.ElementAt(i).Quantity += int.Parse(item.ToString().Split('\t')[2].Split('x')[1]);
+                        if (productList.ElementAt(i).ProductID == int.Parse(item.ToString().Split('\t')[0]))
+                        {
+                            productList.ElementAt(i).Quantity += int.Parse(item.ToString().Split('\t')[2].Split('x')[1]);
+                        }
                     }
+                    catch (Exception)
+                    {
+
+                        return;
+                    }
+                    
                 }
             }
             
@@ -270,20 +299,36 @@ namespace supermarket_app
             {
                 for (int i = 0; i < productList.Count; i++)
                 {
-                    if (productList.ElementAt(i).ProductID == int.Parse(item.ToString().Split('\t')[0]))
+                    try
                     {
-                        productList.ElementAt(i).sold += int.Parse(item.ToString().Split('\t')[2].Split('x')[1]);
+                        if (productList.ElementAt(i).ProductID == int.Parse(item.ToString().Split('\t')[0]))
+                        {
+                            productList.ElementAt(i).sold += int.Parse(item.ToString().Split('\t')[2].Split('x')[1]);
+                        }
                     }
+                    catch (Exception)
+                    {
+                        return;
+                    }
+                    
                 }
             }
             else if (operation == "return")
             {
                 for (int i = 0; i < productList.Count; i++)
                 {
-                    if (productList.ElementAt(i).ProductID == int.Parse(item.ToString().Split('\t')[0]))
+                    try
                     {
-                        productList.ElementAt(i).sold -= int.Parse(item.ToString().Split('\t')[2].Split('x')[1]);
+                        if (productList.ElementAt(i).ProductID == int.Parse(item.ToString().Split('\t')[0]))
+                        {
+                            productList.ElementAt(i).sold -= int.Parse(item.ToString().Split('\t')[2].Split('x')[1]);
+                        }
                     }
+                    catch (Exception)
+                    {
+                        return;
+                    }
+                    
                 }
             }
         }

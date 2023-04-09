@@ -52,16 +52,24 @@ namespace supermarket_app
             
             foreach (var item in cartListBox.Items)
             {
-                if (controller.getQuantity(item) == 0)
+                try
                 {
-                    MessageBox.Show($"Product {item.ToString().Split('\t')[1]} is out of stock!");
+                    if (controller.getQuantity(item) == 0)
+                    {
+                        MessageBox.Show($"Product {item.ToString().Split('\t')[1]} is out of stock!");
+                        return;
+                    }
+                    else if (int.Parse(item.ToString().Split('\t')[2].Split('x')[1]) > controller.getQuantity(item))
+                    {
+                        MessageBox.Show($"Error!, There is only {controller.getQuantity(item)} piece of {item.ToString().Split('\t')[1]} in the inventory!\nYou can not sell more than what you have in the inventory!");
+                        return;
+                    }
+                }
+                catch (Exception)
+                {
                     return;
                 }
-                else if (int.Parse(item.ToString().Split('\t')[2].Split('x')[1]) > controller.getQuantity(item))
-                {
-                    MessageBox.Show($"Error!, There is only {controller.getQuantity(item)} piece of {item.ToString().Split('\t')[1]} in the inventory!\nYou can not sell more than what you have in the inventory!");
-                    return;
-                }
+                
             }
             controller.sell_returnButtonPressed(cartListBox, "sell");
             lastReceipt = " ";
@@ -364,7 +372,16 @@ namespace supermarket_app
             {
                 foreach (string product in cartListBox.Items)
                 {
-                    totalPrice += int.Parse(product.Split('\t')[2].Split("x")[0]) * int.Parse(product.Split('\t')[2].Split("x")[1]);
+                    try
+                    {
+                        totalPrice += int.Parse(product.Split('\t')[2].Split("x")[0]) * int.Parse(product.Split('\t')[2].Split("x")[1]);
+                    }
+                    catch (Exception)
+                    {
+
+                        return;
+                    }
+
                 }
                 TotalLabel.Text = "Total: " + totalPrice.ToString();
             }

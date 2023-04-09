@@ -174,7 +174,16 @@ namespace supermarket_app
 
         internal int getQuantity(object item)
         {
-            int productID = int.Parse(item.ToString().Split('\t')[0]);
+            int productID;
+            try
+            {
+                productID = int.Parse(item.ToString().Split('\t')[0]);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+            
             return productlist.getQuantity(productID);
         }
 
@@ -263,7 +272,16 @@ namespace supermarket_app
                 {
                     if (tmp[i].Split(',')[2] == tmp[j].Split(',')[2] && i != j)
                     {
-                        numOfSold += int.Parse(tmp[j].Split(',')[4]);
+                        try
+                        {
+                            numOfSold += int.Parse(tmp[j].Split(',')[4]);
+                        }
+                        catch (Exception)
+                        {
+
+                            return "Error!";
+                        }
+                        
                         tmp.RemoveAt(j);
                         changed = 1;
                     }
@@ -295,11 +313,20 @@ namespace supermarket_app
             {
                 for (int j = 0; j < tmp.Count; j++)
                 {
-                    if (int.Parse(tmp[j].Split(',')[4]) > mostSold)
+                    try
                     {
-                        mostSold = int.Parse(tmp[j].Split(',')[4]);
-                        mostSold_index = j;
+                        if (int.Parse(tmp[j].Split(',')[4]) > mostSold)
+                        {
+                            mostSold = int.Parse(tmp[j].Split(',')[4]);
+                            mostSold_index = j;
+                        }
                     }
+                    catch (Exception)
+                    {
+
+                        return "Error!";
+                    }
+                    
                 }
                 if (mostSold_index != -1)
                 {
