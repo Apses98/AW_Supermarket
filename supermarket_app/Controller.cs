@@ -95,11 +95,15 @@ namespace supermarket_app
             }
             try
             {
-                if (int.Parse(playtime) < 0)
+                if (playtime != "")
                 {
-                    MessageBox.Show("PlayTime can not be negative!");
-                    return false;
+                    if (int.Parse(playtime) < 0)
+                    {
+                        MessageBox.Show("PlayTime can not be negative!");
+                        return false;
+                    }
                 }
+                
             }
             catch (Exception)
             {

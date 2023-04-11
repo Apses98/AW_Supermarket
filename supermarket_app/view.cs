@@ -88,6 +88,11 @@ namespace supermarket_app
         private void addProductButton_Click(object sender, EventArgs e)
         {
             /* Adds new product and clears the textboxes afterwards */
+            if (!(productTypeComboBox.Text == "Book" || productTypeComboBox.Text == "Film" || productTypeComboBox.Text == "Game"))
+            {
+                MessageBox.Show("Please select correct product type!");
+                return;
+            }
             if (controller.addProductButtonPressed(
                 productIDtextBox.Text,
                 nametextBox.Text,
